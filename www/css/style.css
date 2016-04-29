@@ -1,0 +1,38 @@
+#logoIkea{
+    
+    display: inline-block;
+    width: 99%;
+    
+    
+}
+
+#fondoNivel{
+    
+    position: absolute;
+    top: 260px;
+    left: 10px;
+    height: 80px;
+    width: 180px;
+    background-color: gray;
+    border-radius: 20px;
+    
+}
+
+#imagenNivel{
+    
+    position: absolute;
+    top: 250px;
+    left: 10px;
+    height: 100px;
+    width: 50px;
+    background-color: yellow;
+    border-radius: 50px;
+    border-color: black;
+    border-style: solid;
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+    
+    
+}

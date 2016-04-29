@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>JQUERY DEMO</title>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+        <!-- see http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/quick-tip-dont-forget-the-viewport-meta-tag -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <style>
+            /* following two viewport lines are equivalent to the meta viewport statement above, needed for Windows */
+            /* see http://www.quirksmode.org/blog/archives/2014/05/html5_dev_conf.html and http://dev.w3.org/csswg/css-device-adapt/ */
+            @-ms-viewport { width: 100vw ; zoom: 100% ; }  @viewport { width: 100vw ; zoom: 100% ; }
+            @-ms-viewport { user-zoom: fixed ; }           @viewport { user-zoom: fixed ; }
+        </style>
+
+        <script src="cordova.js"></script>          <!-- phantom library, needed for Cordova api calls, added during build -->
+        <script src="js/app.js"></script>           <!-- recommended location of your JavaScript code relative to other JS files -->
+        <script src="xdk/init-dev.js"></script>     <!-- normalizes device and document ready events, see README for details -->
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <link rel="stylesheet" href="css/style.css"/>
+
+    </head>
+    <style>
+    </style>
+    <body>
+
+    <!-- LOGIN -->
+    <section id="index" data-role="page">
+        <div data-role="content">
+            <header data-role="header" data-position="fixed">
+                <h1>Ikea</h1>
+            </header>
+            <img id = 'logoIkea' src ="img/ikea-home.png">
+            Usuario:<input name="usuario" type="text" id="usu"/>
+            Password:<input name="password" type="password" id="password"/>
+            <input type="submit" value="LOGIN" id="login">
+        </div>
+    </section>
+
+    <!-- MENU -->
+    <section id="menu" data-role="page">
+            <div data-role="main" class="ui-content">
+                <div data-role="controlgroup" data-type="vertical">
+                    <a href="#home" id="load-menu" class="ui-btn">Home</a>        
+                    <a class="ui-btn" id="menunivel">Nivel</a>
+                    <a href="#cuentaAtras" class="ui-btn">Tiempo</a> 
+                    <a href="#logout" class="ui-btn" id="logout">Logout</a> 
+                </div>
+            </div>
+        <footer data-role="footer" >Peu de pàgina</footer>
+    </section> 
+
+        <!-- MAIN -->
+        <section id="home" data-role="page">
+
+            <header data-role="header">
+                <a href="#" data-rel="back" class="ui-btn-left" id="backButton">Back</a>
+                <a href="#add" class="ui-btn-right" id="panelButton">Add</a>
+                <h1>Home</h1>
+            </header>
+
+            <!-- Panel Lateral -->
+            <div id="add" data-role="panel" data-display="overlay" data-position="right">
+                <button id="home-load">Añadir Imagen Panel</button>
+                    <div> 
+                        <img  id="img" src="img/default.png" style="width:100%;">
+                    </div>
+                    <form id="menuform" data-role="listview" data-inset="true">
+                           <select name="select-native-1" id="ubicacion">
+                                <option value="1">Comedor</option>
+                                <option value="2">Cocina</option>
+                                <option value="3">Dormitorio</option>
+                            </select>               
+                            <input type="text" name="textarea-6" placeholder="Nombre" id="nombre"></textarea>       
+                             <label>Anchura:</label>      
+                            <input type="range" name="range-1a" id="anchura" min="0" max="100" value="0">
+                                 <label >Altura:</label>      
+                            <input type="range" name="range-1a" id="altura" min="0" max="100" value="0">  
+                                <label>Profundidad:</label>      
+                            <input type="range" name="range-1a" id="profundidad" min="0" max="100" value="0">
+                        </form>  
+                        <button class="ui-btn ui-corner-all" id="guardar">Guardar</button>
+                         <a data-rel="close" class="ui-btn ui-corner-all">Cancelar</a>
+                     </div>
+                     <!-- Fin Panel Lateral -->
+
+                <div data-role="tabs" id="tabs">
+
+                    <!-- Menu Tabs -->
+                    <div data-role="navbar">
+                         <ul>
+                            <li><a href="#home" class="ui-btn-active" id="menuHome">Home</a></li>
+                            <li><a href="#nivel" id="menuNivel">Nivel</a></li>
+                            <li><a href="#cuentaAtras" id="menuCuenta">Cuenta</a></li>                        
+                        </ul>
+                    </div>
+
+
+                    <!-- HOME -->
+                    <div id="home" class="ui-body-d ui-content">          
+                        <ul data-role="listview" data-inset="true" id="mainHome">               
+                        </ul>
+                    </div>
+
+                    <!-- NIVEL --> 
+                    <div id="nivel">
+                        <label for="flip-1">Activar el nivel:</label>
+                        <select name="flip-1" id="flip-1" data-role="slider">
+                            <option value="off">Off</option>
+                            <option value="on">On</option>
+                        </select> 
+                        <label for="flip-2">Avisar del desnivel:</label>
+                            <select name="flip-2" id="flip-2" data-role="slider">
+                                <option value="off">Off</option>
+                                <option value="on">On</option>
+                            </select> 
+                        <div id = "fondoNivel"></div>
+                        <div id = "imagenNivel"></div>
+                    </div>
+
+                    <!-- CUENTA ATRAS -->
+                    <div id="cuentaAtras">
+                        Tiempo: <input id ="tiempoAContar" type="number">
+                        <button id ="botonContar">Contar</button>
+                        <div id ="cuentaVisible">0</div>
+                    </div>
+                </div> 
+                
+            <!-- FIN MAIN -->
+            <footer data-role="footer">www.ikea.com</footer>
+        </section> 
+
+
+        <!-- DETALLE -->
+        <section id="detalle" data-role="page">
+            <header data-role="header">
+                <a href="#" data-rel="back" class="ui-btn-left" id="return">Back</a>
+                <h1>Detalle</h1>
+            </header>
+            <div data-role="main" class="ui-content">
+                <div class="ui-grid-b">
+                    <div class="ui-block-a">
+                            <img src="img/default.png" style="width:100%" id="img-detalle-0">
+                    </div>
+                    <div class="ui-block-b">
+                            <img src="img/default.png" style="width:100%" id="img-detalle-1">
+                    </div>
+                    <div class="ui-block-c">
+                            <img src="img/default.png" style="width:100%" id="img-detalle-2">
+                    </div>
+                </div> 
+                <button id="detalle-load">Añadir Imagen</button>
+               <ul data-role="listview" data-inset="true">
+                <li class="ui-btn" id="nombre-detalle">Nombre: </li>
+                <li class="ui-btn" id="anchura-detalle">Anchura: </li>
+                <li class="ui-btn" id="altura-detalle">Altura: </li>
+                <li class="ui-btn" id="profundidad-detalle">Profundidad: </li>
+            </ul>
+            </div>           
+            <footer data-role="footer">www.ikea.com</footer>
+        </section> 
+
+    </body>
+</html>
